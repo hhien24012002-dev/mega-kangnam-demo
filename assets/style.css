@@ -374,3 +374,56 @@ thead th { color:var(--sb-text-muted); font-weight:500; border-bottom:1px solid 
 .stickybar { position:fixed; inset-inline:0; bottom:0; z-index:100; display:grid; padding:10px 16px calc(10px + env(safe-area-inset-bottom)); background:var(--sb-n-0); border-top:1px solid var(--sb-border-default); }
 @media (min-width:1100px){ .stickybar{ display:none; } }
 @media (max-width:1099px){ body{ padding-bottom:72px; } .header .wrap{ min-height:88px; } .logo img{ height:72px; } }
+
+@media (max-width:767px){
+  .wrap { padding-inline:16px; }
+  .header .wrap { min-height:78px; gap:10px; }
+  .logo img { height:60px; }
+  .menu-toggle { width:42px; height:42px; }
+  .quick { padding:18px 14px; }
+  .quick .btn { width:100%; }
+  .quick .muted { font-size:var(--sb-text-md); }
+  .hero { min-height:620px; }
+  .hero__content { gap:12px; padding-block:42px 72px; }
+  .hero__kicker { font-size:15px; }
+  .hero h1 { font-size:clamp(35px,12vw,68px); }
+  .hero__sub { font-size:clamp(22px,7vw,30px); }
+  .hero__text { font-size:17px; }
+  .hero .btn-row { width:100%; }
+  .hero .btn { flex:1 1 100%; min-height:50px; }
+  .btn-row { gap:10px; }
+  .quickband { margin-top:-36px; }
+  .stats-grid { grid-template-columns:repeat(2, minmax(0, 1fr)); }
+  .stat-card { padding:18px 12px; }
+  .feature-card, .service-card { padding:20px 16px; }
+  .feature-card__icon { width:44px; height:44px; }
+  .segmented { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); width:100%; }
+  .segmented__btn { min-height:44px; }
+  .service-filter { grid-template-columns:1fr; }
+  .head { margin-bottom:24px; }
+  .head--split { display:grid; gap:16px; }
+  .head--split h2 { max-width:16ch; }
+  .row { padding:20px 0; }
+  .row h3 { font-size:1.5rem; }
+  .row p { font-size:14px; }
+  .tile .foot { display:grid; gap:8px; }
+  .team { grid-template-columns:1fr; }
+  .journal { gap:28px; }
+  .lead-post h3, .post h3 { font-size:1.5rem; }
+  .cta { gap:18px; }
+  .cta .btn-row { justify-content:stretch; }
+  .cta .btn { width:100%; }
+  .footer { padding-top:52px; }
+  .footer__grid { gap:28px; }
+  .footer .fine { margin-top:32px; }
+}
+
+@media (max-width:480px){
+  .hero { min-height:560px; }
+  .hero h1 { font-size:clamp(32px,14vw,54px); }
+  .stats-grid { grid-template-columns:1fr; }
+  .segmented { grid-template-columns:1fr; }
+  .service-card h3, .feature-card h3 { font-size:1.25rem; }
+  .cta h2 { font-size:clamp(28px,12vw,40px); }
+  .stickybar .btn { min-height:46px; }
+}
