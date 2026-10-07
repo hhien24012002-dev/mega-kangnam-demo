@@ -1,0 +1,13 @@
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Editor config
+.vscode/
+*.swp
+*.swo
+
+# Local caches
+.cache/
+__pycache__/
+node_modules/
