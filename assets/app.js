@@ -18,6 +18,73 @@
     });
   }
 
+  // Scroll reveal + count-up for landing page accents
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && revealEls.length) {
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.18 });
+    revealEls.forEach(function (el) { revealObserver.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+  }
+
+  var counters = document.querySelectorAll('[data-count]');
+  if ('IntersectionObserver' in window && counters.length) {
+    var countObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        var target = Number(el.dataset.count || 0);
+        var suffix = el.dataset.suffix || '';
+        var decimals = (String(target).split('.')[1] || '').length;
+        var duration = 900;
+        var start = null;
+
+        function update(ts) {
+          if (!start) start = ts;
+          var progress = Math.min((ts - start) / duration, 1);
+          var eased = 1 - Math.pow(1 - progress, 3);
+          var value = target * eased;
+          el.textContent = Number(value).toFixed(decimals) + suffix;
+          if (progress < 1) requestAnimationFrame(update);
+          else el.textContent = target.toFixed(decimals) + suffix;
+        }
+
+        requestAnimationFrame(update);
+        countObserver.unobserve(el);
+      });
+    }, { threshold: 0.4 });
+    counters.forEach(function (el) { countObserver.observe(el); });
+  } else {
+    counters.forEach(function (el) {
+      var target = Number(el.dataset.count || 0);
+      var suffix = el.dataset.suffix || '';
+      el.textContent = target + suffix;
+    });
+  }
+
+  // Service category filter
+  var filterButtons = document.querySelectorAll('.segmented__btn');
+  var serviceCards = document.querySelectorAll('.service-card');
+  if (filterButtons.length && serviceCards.length) {
+    filterButtons.forEach(function (button) {
+      button.addEventListener('click', function () {
+        var filter = button.dataset.filter;
+        filterButtons.forEach(function (btn) { btn.classList.toggle('is-active', btn === button); });
+        serviceCards.forEach(function (card) {
+          var show = filter === 'all' || card.dataset.category === filter;
+          card.classList.toggle('hidden', !show);
+        });
+      });
+    });
+  }
+
   // Booking form
   var form = document.getElementById('booking-form');
   if (!form) return;
